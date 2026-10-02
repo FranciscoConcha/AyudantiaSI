@@ -23,6 +23,19 @@ builder.Services.AddScoped<IEmailSender, SendGridEmailSender>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+// Configuración de CORS
+const string politicCors = "PoliticaCors";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(politicCors, policy =>
+    {
+        policy.WithOrigins(builder.Configuration["UrlFront"]!)
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    });
+});
+
 // Configuración de token de usuario
 builder.Services.AddAuthentication(options =>
 {
@@ -81,6 +94,8 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(politicCors);
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
