@@ -52,20 +52,35 @@ public class AuthService(TecnoFixDbContext context, IConfiguration configuration
         if (usuarioExistente is not null)
             return new RegistrarClienteResponseDto { Mensaje = "El correo o RUT ya está registrado." };
         var passwordTemporal = PasswordGenerator.GenerateRandomPassword();
-        rolCliente.Name = "Cliente1"; // Asignar el rol de cliente al nuevo usuario
+        
     
-        await _context.SaveChangesAsync(); // Guardar los cambios en la base de datos
         try
         {
             
             var cuerpoHtml = $"""
-            <h2>Bienvenido a TecnoFix, {request.Name}</h2>
-            <p>Tu cuenta fue creada exitosamente. Esta es tu contraseña temporal:</p>
-            <p style="font-size:20px;font-weight:bold;">{passwordTemporal}</p>
-            <p>Te recomendamos cambiarla después de tu primer inicio de sesión.</p>
+                <div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; max-width: 480px;">
+                <h2 style="color: #1d4ed8;">Bienvenido a TecnoFix, {request.Name}</h2>
+                <p>Tu cuenta fue creada exitosamente. Esta es tu contraseña temporal:</p>
+                <p style="font-size: 18px; font-weight: bold; letter-spacing: 1px;">{passwordTemporal}</p>
+                <p>Te recomendamos cambiarla después de tu primer inicio de sesión.</p>
+                <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
+                <p style="font-size: 12px; color: #888;">Este es un correo automático, por favor no respondas.</p>
+                </div>
             """;
             await _emailSender.SendEmailAsync(request.Correo.Trim(), "Tu contraseña temporal - TecnoFix", cuerpoHtml);
-            var nuevoUsuario = new Model.Usuario
+            
+        }
+        catch (Exception ex)
+        {
+            return new RegistrarClienteResponseDto
+            {
+                Id = 0,
+                Name = "",
+                Correo = "",
+                Mensaje = $"Cliente no registrado, falló el envío del correo: {ex.Message}"
+            };
+        }
+        var nuevoUsuario = new Model.Usuario
             {
                 Name = request.Name,
                 Correo = CorreoNormalizado,
@@ -84,17 +99,6 @@ public class AuthService(TecnoFixDbContext context, IConfiguration configuration
                 Correo = nuevoUsuario.Correo,
                 Mensaje = "Cliente registrado. Revisa tu correo para la contraseña temporal."
             };
-        }
-        catch (Exception ex)
-        {
-            return new RegistrarClienteResponseDto
-            {
-                Id = 0,
-                Name = "",
-                Correo = "",
-                Mensaje = $"Cliente no registrado, falló el envío del correo: {ex.Message}"
-            };
-        }
     }
  
 }
