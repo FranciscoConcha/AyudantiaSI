@@ -4,7 +4,10 @@ using SendGrid.Helpers.Mail;
 using TecnoFix.Src.Services.Interfaces;
 
 namespace TecnoFix.Src.Services;
-
+/// <summary>
+/// Implementa el servicio de envío de correos electrónicos utilizando SendGrid.
+/// </summary>
+/// <param name="configuration"></param>
 public class SendGridEmailSender(IConfiguration configuration) : IEmailSender
 {
     private readonly IConfiguration _configuration = configuration;

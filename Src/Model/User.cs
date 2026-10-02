@@ -1,5 +1,7 @@
 namespace TecnoFix.Src.Model;
-
+/// <summary>
+/// Representa un usuario en el sistema.
+/// </summary>
 public class Usuario {
     public int Id {get;set;}
     

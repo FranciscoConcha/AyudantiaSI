@@ -1,4 +1,7 @@
 namespace TecnoFix.Src.Model;
+/// <summary>
+/// Representa un rol de usuario en el sistema.
+/// </summary>
 public class Rol {
     
     public int Id {get;set;}

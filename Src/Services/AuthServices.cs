@@ -6,9 +6,16 @@ using TecnoFix.Src.Utils;
 using TecnoFix.Src.Services.Interfaces;
 
 namespace TecnoFix.Src.Services;
-
+/// <summary>
+/// Implementa los servicios de autenticación y registro de usuarios.
+/// </summary>
+/// <param name="context">Base de datos</param>
+/// <param name="configuration">Configuración de la aplicación</param>
+/// <param name="emailSender">Servicio para envío de correos electrónicos</param>
 public class AuthService(TecnoFixDbContext context, IConfiguration configuration, IEmailSender emailSender) : IAuthService
 {
+    // Inyección de dependencias para el contexto de la base de datos, 
+    // la configuración y el servicio de correo electrónico
     private readonly TecnoFixDbContext _context = context;
     private readonly IConfiguration _configuration = configuration;
     private readonly IEmailSender _emailSender = emailSender;

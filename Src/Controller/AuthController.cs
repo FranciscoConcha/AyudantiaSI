@@ -3,13 +3,19 @@ using TecnoFix.Src.DTO.Usuario;
 using TecnoFix.Src.Services;
 
 namespace TecnoFix.Src.Controllers;
+/// <summary>
+/// Controlador para manejar la autenticación y el registro de usuarios.
+/// </summary>
+/// <param name="authService">Servicio de autenticación</param>
 
 [ApiController]
 [Route("api/[controller]")]
+/// Controlador para manejar la autenticación y el registro de usuarios
 public class AuthController(IAuthService authService) : ControllerBase
 {
+    // Servicio de autenticación inyectado en el controlador
     private readonly IAuthService _authService = authService;
-
+    
     // POST: http://localhost:5321/api/auth/login
     // Generando un token JWT para el usuario autenticado 
     [HttpPost("login")]
@@ -37,8 +43,10 @@ public class AuthController(IAuthService authService) : ControllerBase
             rol = resultado.Rol
         }); 
     }
-
+    // POST: http://localhost:5321/api/auth/register
+    // Registrando un nuevo cliente en el sistema
     [HttpPost("register")]
+    // Endpoint para registrar un nuevo cliente en el sistema
     public async Task<ActionResult<RegistrarClienteResponseDto>> RegistrarCliente(
     [FromBody] RegistrarClienteRequestDto request)
     {
@@ -51,6 +59,8 @@ public class AuthController(IAuthService authService) : ControllerBase
         return Ok(resultado);
     }
 
+    // POST: http://localhost:5321/api/auth/logout
+    // Endpoint para cerrar la sesión del usuario
     [HttpHead("logout")]
     public IActionResult Logout()
     {

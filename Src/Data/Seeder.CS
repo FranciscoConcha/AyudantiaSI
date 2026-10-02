@@ -3,9 +3,16 @@ using Microsoft.EntityFrameworkCore;
 using TecnoFix.Src.Model;
 
 namespace TecnoFix.Src.Data;
-
+/// <summary>
+/// Clase estática que se encarga de sembrar datos iniciales en la base de datos.
+/// </summary>
 public static class DbSeeder
 {
+    /// <summary>
+    /// Siembra los datos iniciales en la base de datos si no existen.
+    /// </summary>
+    /// <param name="context">Base de datos</param>
+    /// <returns></returns>
     public static async Task SeedAsync(TecnoFixDbContext context)
     {
         if (!await context.Roles.AnyAsync())
