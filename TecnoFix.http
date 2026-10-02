@@ -1,0 +1,6 @@
+@TecnoFix_HostAddress = http://localhost:5127
+
+GET {{TecnoFix_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
