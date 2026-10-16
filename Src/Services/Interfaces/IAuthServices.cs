@@ -18,4 +18,10 @@ public interface IAuthService
     /// <param name="request">RegistrarClienteRequestDto como request para envio de los datos </param>
     /// <returns></returns>
     Task<RegistrarClienteResponseDto> RegistrarClienteAsync(RegistrarClienteRequestDto request);
+    /// <summary>
+    /// Registrar un nuevo tecnico, solo valido para el rol de admin con los datos solicitados.
+    /// </summary>
+    /// <param name="request">Dto que incia los acciones solicitados.</param>
+    /// <returns></returns>
+    Task<RegistrarTecnicoResponseDto> RegistrarTecnicoAsync(RegistrarTecnicoRequestDto request);
 }
