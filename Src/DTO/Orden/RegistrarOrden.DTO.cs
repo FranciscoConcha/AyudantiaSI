@@ -31,4 +31,6 @@ public class RegistrarOrdenResponseDto
     public string Estado { get; set; } = string.Empty;
     public string NombreCliente { get; set; } = string.Empty;
     public DateTime FechaRecepcion { get; set; }
+    public bool Succes {get;set;}
+    public string Message {get;set;} =string.Empty;
 }

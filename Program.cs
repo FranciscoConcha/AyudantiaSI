@@ -20,10 +20,11 @@ builder.Services.AddDbContext<TecnoFixDbContext>(options =>
 // Publicar los servicios de autenticación
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailSender, SendGridEmailSender>();
-
+builder.Services.AddScoped<IOrdenService, OrdenService>();
 //Publicar repositorios
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IRolRepository, RolRepository>();
+builder.Services.AddScoped<IOrdenRepository,OrdenRepository>();
 // Configuración para MVC
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
