@@ -5,7 +5,7 @@
 
 # dotenv files
 .env
-//No subir nunca los archivos de configuración de la aplicación
+#No subir nunca los archivos de configuración de la aplicación
 appsettings.*.json
 
 # User-specific files
@@ -44,7 +44,7 @@ bld/
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
-
+appsettings.Development.json
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*

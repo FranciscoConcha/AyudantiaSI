@@ -41,6 +41,8 @@ public class TecnoFixDbContext : DbContext
             e.Property(u => u.Correo).HasMaxLength(256).IsRequired();
             e.Property(u => u.PasswordHash).IsRequired();
             e.Property(u => u.Rut).HasMaxLength(10);
+            //Propiedad nueva para especialidad.
+            e.Property(u => u.Especialidad).HasMaxLength(100);
             // Se establecen índices únicos para los campos Correo y Rut
             e.HasIndex(u => u.Correo).IsUnique();
             e.HasIndex(u => u.Rut).IsUnique();

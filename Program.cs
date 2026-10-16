@@ -25,6 +25,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 // Configuración de CORS
 const string politicCors = "PoliticaCors";
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(politicCors, policy =>

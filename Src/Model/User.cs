@@ -11,7 +11,8 @@ public class Usuario {
     // nuevos atributos agregadas para el usuario
     public string Rut {get;set;} = string.Empty;
     public string Telefono {get;set;} = string.Empty;
-    
+    // Variable nueva para retectar 
+    public string Especialidad {get;set;} = string.Empty;
     public string PasswordHash {get;set;} = string.Empty;
     // Clave foranea del rol del usuario
     public int IdRol {get;set;}
