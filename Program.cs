@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TecnoFix.Src.Data;
+using TecnoFix.Src.Repositories;
+using TecnoFix.Src.Repositories.Intrefaces;
 using TecnoFix.Src.Services;
 using TecnoFix.Src.Services.Interfaces;
 
@@ -19,6 +21,9 @@ builder.Services.AddDbContext<TecnoFixDbContext>(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailSender, SendGridEmailSender>();
 
+//Publicar repositorios
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IRolRepository, RolRepository>();
 // Configuración para MVC
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
