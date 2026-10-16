@@ -25,7 +25,7 @@ public class UsuarioRepository(TecnoFixDbContext context) : IUsuarioRepository
 
     public Task<bool> ExisteCorreoAsync(string correo)
     {
-        return _context.Usuarios.AnyAsync(u => u.Correo == correo);   
+        return _context.Usuarios.AnyAsync(u => u.Correo == correo.ToLower());   
     }
         
 
