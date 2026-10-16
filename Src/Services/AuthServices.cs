@@ -148,7 +148,8 @@ public class AuthService(IUsuarioRepository usuarioRepository, IRolRepository ro
                     Id = 0,
                     Name = "",
                     Correo = "",
-                    Mensaje = $"Cliente no registrado, falló el envío del correo: {ex.Message}"
+                    Mensaje = $"Cliente no registrado, falló el envío del correo: {ex.Message}",
+                    Success=false
                 };
             }
             var nuevoUsuario = new Model.Usuario
@@ -165,7 +166,8 @@ public class AuthService(IUsuarioRepository usuarioRepository, IRolRepository ro
                     Id = nuevoUsuario.Id,
                     Name = nuevoUsuario.Name,
                     Correo = nuevoUsuario.Correo,
-                    Mensaje = "Cliente registrado. Revisa tu correo para la contraseña temporal."
+                    Mensaje = "Cliente registrado. Revisa tu correo para la contraseña temporal.",
+                    Success = true
                 };
 
             
@@ -177,8 +179,8 @@ public class AuthService(IUsuarioRepository usuarioRepository, IRolRepository ro
                 Name = "",
                 Correo = "",
                 Especialidad = "",
-                Mensaje = "Error en el servicio "+ ex.Message
-
+                Mensaje = "Error en el servicio "+ ex.Message,
+                Success =false
             };
         }
         

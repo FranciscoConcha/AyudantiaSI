@@ -22,4 +22,5 @@ public class RegistrarTecnicoResponseDto
     public string Correo { get; set; } = string.Empty;
     public string Especialidad { get; set; } = string.Empty;
     public string Mensaje { get; set; } = "Técnico registrado. La contraseña temporal fue enviada a su correo.";
+    public bool Success {get;set;}
 }

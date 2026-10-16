@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TecnoFix.Src.DTO.Usuario;
 using TecnoFix.Src.Services;
@@ -57,6 +58,18 @@ public class AuthController(IAuthService authService) : ControllerBase
             );
 
         return Ok(resultado);
+    }
+    [Authorize(Roles ="Administrador")]
+    [HttpPost("RegisterTecnico")]
+    public async Task<ActionResult<RegistrarTecnicoResponseDto>> RegistrarTecnico(
+    [FromBody] RegistrarTecnicoRequestDto request)
+    {
+        var responseDto = await _authService.RegistrarTecnicoAsync(request);
+
+        if (!responseDto.Success )
+            return BadRequest(new { mensaje = responseDto.Mensaje });
+
+        return Ok(responseDto);
     }
 
     // POST: http://localhost:5321/api/auth/logout
