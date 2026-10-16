@@ -14,7 +14,7 @@ public class UsuarioRepository(TecnoFixDbContext context) : IUsuarioRepository
 
     public Task<Usuario?> ObtenerPorCorreoAsync(string correo)
     {
-        return _context.Usuarios.Include(u => u.RolUsuario).FirstOrDefaultAsync(u => u.Correo == correo);
+        return _context.Usuarios.Include(u => u.RolUsuario).FirstOrDefaultAsync(u => u.Correo == correo.ToLower());
     }
         
 
