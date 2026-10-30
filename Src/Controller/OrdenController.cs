@@ -31,7 +31,24 @@ public class OrdenController(IOrdenService ordenService) : ControllerBase
         }
         return Ok(response);
     }
+    
+    [HttpGet]
+    [Authorize(Roles = "Tecnico")]
+    public async Task<IActionResult> Listar() => Ok(await _ordenService.ListarAsync());
 
+    [HttpPatch("{id}/estado")]
+    [Authorize(Roles = "Tecnico")]
+    public async Task<IActionResult> ActualizarEstado(int id, [FromBody] ActualizarEstadoRequestDto request)
+    {
+        var idTecnico = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                                ?? User.FindFirst("sub")!.Value);
+
+        var resultado = await _ordenService.ActualizarEstadoAsync(id, request, idTecnico);
+        if (!resultado.Success)
+            return BadRequest(new { mensaje = resultado.Mensaje });
+
+        return Ok(resultado);
+    }
     // El id del usuario viene en el JWT (claim "sub"). Según cómo ASP.NET mapee los claims,
     // puede llegar como NameIdentifier o como "sub": revisamos ambos.
     private int? ObtenerIdUsuarioActual()

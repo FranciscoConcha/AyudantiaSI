@@ -10,4 +10,15 @@ public interface IEmailSender
     /// <param name="cuerpoHtml">El cuerpo del correo electrónico en formato HTML.</param>
     /// <returns></returns>
     Task SendEmailAsync(string destino, string asunto, string cuerpoHtml);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="destino"></param>
+    /// <param name="asunto"></param>
+    /// <param name="cuerpoHtml"></param>
+    /// <param name="adjunto"></param>
+    /// <param name="nombreArchivo"></param>
+    /// <returns></returns>
+    Task SendEmailWithAttachmentAsync(string destino, string asunto, string cuerpoHtml,
+                                  byte[] adjunto, string nombreArchivo);
 }

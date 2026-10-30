@@ -39,10 +39,12 @@ public class AuthController(IAuthService authService) : ControllerBase
             Expires = DateTimeOffset.UtcNow.AddHours(1)
         });
 
-        return Ok(
-            new { usuario = resultado.Name,
-            rol = resultado.Rol
-        }); 
+        return Ok(new
+        {
+            name = resultado.Name,
+            rol = resultado.Rol,
+            message = resultado.Message
+        });
     }
     // POST: http://localhost:5321/api/auth/register
     // Registrando un nuevo cliente en el sistema

@@ -21,6 +21,8 @@ builder.Services.AddDbContext<TecnoFixDbContext>(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailSender, SendGridEmailSender>();
 builder.Services.AddScoped<IOrdenService, OrdenService>();
+builder.Services.AddScoped<IBitacoraPdfService, BitacoraPdfService>();
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 //Publicar repositorios
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IRolRepository, RolRepository>();
