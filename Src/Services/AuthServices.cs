@@ -122,7 +122,7 @@ public class AuthService(IUsuarioRepository usuarioRepository, IRolRepository ro
                 return new RegistrarTecnicoResponseDto { Mensaje = "No se encontró el rol de Cliente en la base de datos." };
 
             var usuarioExistenteCorreo = await _usuarioRepository.ExisteCorreoAsync(CorreoNormalizado);
-            if (!usuarioExistenteCorreo )
+            if (usuarioExistenteCorreo )
                 return new RegistrarTecnicoResponseDto { Mensaje = "El correo ya está registrado." };
             var passwordTemporal = PasswordGenerator.GenerateRandomPassword();
             try
@@ -157,6 +157,7 @@ public class AuthService(IUsuarioRepository usuarioRepository, IRolRepository ro
                     Name = request.Name,
                     Correo = CorreoNormalizado,                
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword(passwordTemporal),
+                    Especialidad = request.Especialidad.Trim(),
                     IdRol = rolCliente.Id
                 };
 

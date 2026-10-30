@@ -12,7 +12,7 @@ public class OrdenController(IOrdenService ordenService) : ControllerBase
 {
     private readonly IOrdenService _ordenService = ordenService;
 
-    [Authorize(Roles = "Tecnico")]
+    [Authorize(Roles = "Tecnico,Administrador")]
     [HttpPost]
     public async Task<ActionResult<RegistrarOrdenResponseDto>> RegistrarOrden(
         [FromBody] RegistrarOrdenRequestDto request)
@@ -21,15 +21,15 @@ public class OrdenController(IOrdenService ordenService) : ControllerBase
         if (idTecnico is null)
             return Unauthorized(new { mensaje = "No se pudo identificar al usuario." });
 
-        var responseDto = await _ordenService.RegistrarOrdenAsync(request, idTecnico.Value);
+        var response = await _ordenService.RegistrarOrdenAsync(request, idTecnico.Value);
 
-        if (responseDto is null  )
+        if (response is null)
             return BadRequest(new { mensaje = "Error en el servidor"  });
-        if(!responseDto.Succes)
+        if(!response.Success)
         {
-            return BadRequest(new {mensaje = responseDto.Message});
+            return BadRequest(response);
         }
-        return Ok(responseDto);
+        return Ok(response);
     }
 
     // El id del usuario viene en el JWT (claim "sub"). Según cómo ASP.NET mapee los claims,

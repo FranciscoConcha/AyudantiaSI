@@ -6,7 +6,6 @@ public class BitacoraEvento
 
     public int IdOrden { get; set; }
     public OrdenReparacion Orden { get; set; } = default!;
-    // Vitacora
     public DateTime FechaHora { get; set; } = DateTime.UtcNow;
 
     public int IdResponsable { get; set; }

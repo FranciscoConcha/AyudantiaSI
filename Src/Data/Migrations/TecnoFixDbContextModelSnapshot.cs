@@ -150,7 +150,6 @@ namespace TecnoFix.Src.Data.Migrations
                         .HasColumnType("character varying(256)");
 
                     b.Property<string>("Especialidad")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
@@ -167,12 +166,10 @@ namespace TecnoFix.Src.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Rut")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
 
                     b.Property<string>("Telefono")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

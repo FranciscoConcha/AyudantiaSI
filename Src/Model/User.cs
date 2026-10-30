@@ -9,10 +9,10 @@ public class Usuario {
     
     public string Correo {get;set;} = string.Empty;
     // nuevos atributos agregadas para el usuario
-    public string Rut {get;set;} = string.Empty;
-    public string Telefono {get;set;} = string.Empty;
+    public string? Rut {get;set;} 
+    public string? Telefono {get;set;}
     // Variable nueva para retectar 
-    public string Especialidad {get;set;} = string.Empty;
+    public string? Especialidad {get;set;} 
     public string PasswordHash {get;set;} = string.Empty;
     // Clave foranea del rol del usuario
     public int IdRol {get;set;}

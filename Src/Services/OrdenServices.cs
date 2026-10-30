@@ -20,6 +20,7 @@ public class OrdenService(IOrdenRepository ordenRepository, IUsuarioRepository u
         if (rutNormalizado is null)
             return new RegistrarOrdenResponseDto
             {
+                Success = false,
                 Message = "Rut de cliente no existe"
             };
 
@@ -62,7 +63,8 @@ public class OrdenService(IOrdenRepository ordenRepository, IUsuarioRepository u
             NumeroOrden = FormatearNumeroOrden(orden.Id),
             Estado = orden.Estado.ToString(),
             NombreCliente = cliente.Name,
-            FechaRecepcion = orden.FechaRecepcion
+            FechaRecepcion = orden.FechaRecepcion,
+            Success =true
         };
     }
 
