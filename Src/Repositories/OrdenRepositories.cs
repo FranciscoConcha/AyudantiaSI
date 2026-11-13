@@ -23,8 +23,8 @@ public class OrdenRepository(TecnoFixDbContext context) : IOrdenRepository
     public async Task<List<OrdenReparacion>> ListarAsync() =>
         await context.Ordenes
             .Include(o => o.Cliente)
-            .OrderByDescending(o => o.FechaRecepcion)
+            .OrderBy(o => o.FechaRecepcion)
             .ToListAsync();
-
+    
     public async Task GuardarCambiosAsync() => await context.SaveChangesAsync();
 }

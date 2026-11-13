@@ -1,6 +1,7 @@
 using TecnoFix.Src.Model;
 
 namespace TecnoFix.Src.Services;
+
 /// <summary>
 /// Clase que representa un diccionario para pasar las etapadas de cada orden.
 /// </summary>

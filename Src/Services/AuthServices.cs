@@ -26,7 +26,7 @@ public class AuthService(IUsuarioRepository usuarioRepository, IRolRepository ro
 
     public async Task<LoginResponseDto?> LoginAsync(LoginRequestDto request)
     {
-        var usuario = await _usuarioRepository.ObtenerPorCorreoAsync(request.Correo);
+        var usuario = await _usuarioRepository.ObtenerPorCorreoAsync(request.Correo); 
             // Clase usuario || null;
                                 //  PANCHO123 => FASFASF   == WEKFNWE
         if (usuario is null  || !BCrypt.Net.BCrypt.Verify(request.Password, usuario.PasswordHash))

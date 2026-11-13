@@ -4,7 +4,8 @@ public class ActualizarEstadoRequestDto
 {
     [Required] 
     public string NuevoEstado { get; set; } = null!;
-    [Required, MinLength(5)] 
+    // ERS ORD-004: el comentario es obligatorio (sin largo mínimo)
+    [Required(ErrorMessage = "Debe ingresar un comentario del avance")]
     public string Comentario { get; set; } = null!;
 }
 

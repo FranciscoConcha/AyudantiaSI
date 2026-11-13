@@ -72,7 +72,7 @@ public class OrdenService(IOrdenRepository ordenRepository, IUsuarioRepository u
     public async Task<List<OrdenResumenDto>> ListarAsync()
 {
     var ordenes = await _ordenRepository.ListarAsync();
-    return ordenes.Select(o => new OrdenResumenDto
+    return ordenes.Select(o => new OrdenResumenDto 
     {
         Id = o.Id,
         NumeroOrden = $"ORD-{o.Id:D6}",
@@ -88,7 +88,7 @@ public class OrdenService(IOrdenRepository ordenRepository, IUsuarioRepository u
         int idOrden, ActualizarEstadoRequestDto request, int idTecnico)
     {
         if (string.IsNullOrWhiteSpace(request.Comentario))
-            return Fallo("El comentario es obligatorio.");
+            return Fallo("Debe ingresar un comentario del avance"); // mensaje exacto del ERS (ORD-004)
 
         if (!Enum.TryParse<EstadoOrden>(request.NuevoEstado, out var nuevo))
             return Fallo("El estado indicado no existe.");
@@ -97,7 +97,7 @@ public class OrdenService(IOrdenRepository ordenRepository, IUsuarioRepository u
         if (orden == null)
             return Fallo("La orden no existe.");
 
-        if (orden.Estado == EstadoOrden.Entregada)
+        if (orden.Estado == EstadoOrden.Entregada) 
             return Fallo("La orden ya fue entregada y no puede modificarse.");
 
         if (!TransicionesEstado.EsValida(orden.Estado, nuevo))
@@ -157,7 +157,7 @@ public class OrdenService(IOrdenRepository ordenRepository, IUsuarioRepository u
 
     private static ActualizarEstadoResponseDto Fallo(string mensaje) =>
         new() { Success = false, Mensaje = mensaje };
-
+        
     // Único lugar donde se define el formato del número de orden (ambigüedad 6 del ERS, pendiente).
     private static string FormatearNumeroOrden(int id) => $"ORD-{id:D6}";
 }

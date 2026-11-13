@@ -100,9 +100,25 @@ using (var scope = app.Services.CreateScope())
     var context = scope.ServiceProvider.GetRequiredService<TecnoFixDbContext>();
     await context.Database.MigrateAsync();     
     await DbSeeder.SeedAsync(context);         
+    // Usuarios de prueba (E2E y k6): solo en desarrollo, nunca en producción
+    if (app.Environment.IsDevelopment())
+        await DbSeeder.SeedDatosPruebaAsync(context);
 }
 
 app.UseHttpsRedirection();
+// Verifica los tiempos de los endpoints
+app.Use(async (context, next) =>
+{
+    var cronometro = System.Diagnostics.Stopwatch.StartNew();
+    await next();
+    cronometro.Stop();
+
+    app.Logger.LogInformation("{Metodo} {Ruta} -> {Status} en {Ms} ms",
+        context.Request.Method,
+        context.Request.Path,
+        context.Response.StatusCode,
+        cronometro.ElapsedMilliseconds);
+});
 app.UseCors(politicCors);
 
 app.UseAuthentication();
